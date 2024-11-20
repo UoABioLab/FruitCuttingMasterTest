@@ -1,0 +1,163 @@
+:root {
+  --primary-color: #4CAF50;
+  --secondary-color: #2196F3;
+  --background-color: rgba(0, 0, 0, 0.7);
+  --text-color: #ffffff;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('/resources/images/background1.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Comic Sans MS', cursive;
+  overflow: hidden;
+}
+
+.screen {
+  position: absolute;
+  width: 80%;
+  max-width: 800px;
+  padding: 20px;
+  background-color: var(--background-color);
+  border-radius: 10px;
+  text-align: center;
+  color: var(--text-color);
+}
+
+.hidden {
+  display: none;
+}
+
+/* 难度选择界面样式 */
+#difficultyScreen h1 {
+  font-size: 2.5em;
+  margin-bottom: 40px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.input-container, .difficulty-container {
+  margin: 20px 0;
+}
+
+input, select {
+  width: 200px;
+  padding: 10px;
+  font-size: 1.1em;
+  border-radius: 5px;
+  border: none;
+  background-color: rgba(255,255,255,0.9);
+}
+
+button {
+  padding: 12px 30px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* 游戏界面样式 */
+#gameScreen {
+  width: 100vw;
+  height: 100vh;
+  background: none;
+  padding: 0;
+  max-width: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.game-stats {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 2em;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 15px;
+  border-radius: 8px;
+  letter-spacing: 1px;
+}
+
+.game-stats div {
+  margin: 5px 0;
+  padding: 5px 0;
+}
+
+.camera-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 250px;
+  height: 187.5px;
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 5px;
+  overflow: hidden;
+  z-index: 10;
+}
+
+#webcam, #poseCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#gameCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.exit-button {
+  margin-top: 10px;
+  background-color: #dc3545;  /* 红色背景 */
+}
+
+.exit-button:hover {
+  background-color: #c82333;
+}
+
+/* 添加回到主页按钮样式 */
+.home-button {
+    margin-top: 10px;
+    margin-left: 10px;  /* 与重新开始按钮保持一定间距 */
+    background-color: var(--secondary-color);  /* 使用蓝色以区分 */
+}
+
+.home-button:hover {
+    background-color: #1976D2;
+}
+
+#webcam {
+    transform: scaleX(-1) !important;
+}
+
+#poseCanvas {
+    transform: scaleX(-1) !important;
+}
+
+/* 添加全屏时的背景样式 */
+body.fullscreen {
+  background-size: cover;
+  background-position: center;
+}

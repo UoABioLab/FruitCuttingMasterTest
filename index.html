@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Cutting Master</title>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+</head>
+<body>
+    <!-- Game Difficulty Selection Screen -->
+    <div id="difficultyScreen" class="screen">
+        <h1>Fruit Cutting Master</h1>
+        <div class="input-container">
+            <input type="text" id="playerID" placeholder="Enter your ID">
+        </div>
+        <div class="difficulty-container">
+            <select id="difficultySelect">
+                <option value="" disabled selected>Select Difficulty</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+        </div>
+        <button id="startButton">Start Game</button>
+        <button id="exitButton" class="exit-button">Exit Game</button>
+    </div>
+
+    <!-- Game Main Screen -->
+    <div id="gameScreen" class="screen hidden">
+        <div class="game-stats">
+            <div id="score">Score: 0</div>
+            <div id="life">Lives: 3</div>
+            <div id="toComplete">Remaining: 10</div>
+        </div>
+        <div class="camera-container">
+            <video id="webcam" playsinline autoplay muted></video>
+            <canvas id="poseCanvas"></canvas>
+        </div>
+        <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameOverScreen" class="screen hidden">
+        <h2>Game Over</h2>
+        <div id="finalScore">Final Score: 0</div>
+        <button id="restartButton">Play Again</button>
+        <button id="homeButton" class="home-button">Back to Home</button>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>
