@@ -1,6 +1,8 @@
 import { DifficultySettings, DIFFICULTY_SETTINGS } from './difficulty-manager'
 import { PoseDetection } from './pose-detection'
 import { Fruit } from './fruit'
+import {t} from '../Language/language.js'
+
 export class Game {
     constructor() {
         this.canvas = document.getElementById('gameCanvas');
@@ -40,8 +42,8 @@ export class Game {
             throw error;
         }
     }
-    async start(playerId, difficulty) {
-        this.playerId = playerId;
+    async start(difficulty) {
+        // this.playerId = playerId;
         this.difficulty = difficulty;
         this.settings = DIFFICULTY_SETTINGS[difficulty];
         this.numberToComplete = this.settings.scoreThreshold;
@@ -197,14 +199,14 @@ export class Game {
         this.drawPoseDetection();
     }
     updateUI() {
-        document.getElementById('score').textContent = `Score: ${this.score}`;
-        document.getElementById('life').textContent = `Lives: ${this.life}`;
-        document.getElementById('toComplete').textContent = `Remaining: ${this.numberToComplete}`;
+        document.getElementById('score').textContent = `${t('score')}: ${this.score}`;
+        document.getElementById('life').textContent = `${t('lives')}: ${this.life}`;
+        document.getElementById('toComplete').textContent = `${t('remaining')}: ${this.numberToComplete}`;
     }
     showGameOver() {
         document.getElementById('gameScreen').classList.add('hidden');
         document.getElementById('gameOverScreen').classList.remove('hidden');
-        document.getElementById('finalScore').textContent = `Final Score: ${this.score}`;
+        document.getElementById('finalScore').textContent = `${t('finalScore')}: ${this.score}`;
     }
     getNosePosition() {
         if (this.poseResults && this.poseResults.poseLandmarks) {
@@ -226,24 +228,24 @@ export class Game {
         try {
             // 加载图片资源
             this.images = {
-                background: await this.loadImage('/resources/images/background1.jpg'),
+                background: await this.loadImage('resources/images/background1.jpg'),
                 fruits: await Promise.all([
-                    this.loadImage('/resources/images/fruits/apple.png'),
-                    this.loadImage('/resources/images/fruits/orange.png'),
-                    this.loadImage('/resources/images/fruits/pineapple.png'),
-                    this.loadImage('/resources/images/fruits/strawberry.png')
+                    this.loadImage('resources/images/fruits/apple.png'),
+                    this.loadImage('resources/images/fruits/orange.png'),
+                    this.loadImage('resources/images/fruits/pineapple.png'),
+                    this.loadImage('resources/images/fruits/strawberry.png')
                 ]),
                 poses: {
-                    handsJoined: await this.loadImage('/resources/images/poses/hands-joined.png'),
-                    prayingHands: await this.loadImage('/resources/images/poses/praying-hands.png'),
-                    squat: await this.loadImage('/resources/images/poses/squat.png')
+                    handsJoined: await this.loadImage('resources/images/poses/hands-joined.png'),
+                    prayingHands: await this.loadImage('resources/images/poses/praying-hands.png'),
+                    squat: await this.loadImage('resources/images/poses/squat.png')
                 }
             };
             // 加载音效
             this.sounds = {
-                succeed: new Audio('/resources/sounds/succeed.mp3'),
-                fail: new Audio('/resources/sounds/fail.mp3'),
-                background: new Audio('/resources/sounds/background.mp3')
+                succeed: new Audio('resources/sounds/succeed.mp3'),
+                fail: new Audio('resources/sounds/fail.mp3'),
+                background: new Audio('resources/sounds/background.mp3')
             };
             // 设置背景音乐循环播放
             this.sounds.background.loop = true;
@@ -335,7 +337,7 @@ export class Game {
             this.ctx.font = '48px Comic Sans MS';
             this.ctx.fillStyle = 'white';
             this.ctx.textAlign = 'center';
-            this.ctx.fillText(`Calibration: ${i}`, this.canvas.width/2, this.canvas.height/2);
+            this.ctx.fillText(`${t('calibrate')}: ${i}`, this.canvas.width/2, this.canvas.height/2);
             await new Promise(resolve => setTimeout(resolve, 1000));
         }
         // 获取校准姿势的基准距离
@@ -457,7 +459,7 @@ export class Game {
         const result = await this.showRetryDialog();
         if (result) {
             // 用户选择重试
-            await this.start(this.playerId, this.settings);
+            await this.start(this.settings);
         } else {
             // 用户选择返回主菜单
             this.returnToMainMenu();
@@ -490,8 +492,8 @@ export class Game {
         document.getElementById('poseCanvas').style.display = 'none';
         // 显示难度选择界面
         document.getElementById('difficultyScreen').classList.remove('hidden');
-        // 清空玩家ID输入框
-        document.getElementById('playerID').value = '';
+        // // 清空玩家ID输入框
+        // document.getElementById('playerID').value = '';
         // 重置难度选择
         document.getElementById('difficultySelect').value = '';
     }

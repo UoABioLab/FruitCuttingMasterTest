@@ -11,16 +11,16 @@
 <body>
     <!-- Game Difficulty Selection Screen -->
     <div id="difficultyScreen" class="screen">
-        <h1>Fruit Cutting Master</h1>
-        <div class="input-container">
+        <h1 id="gameTitle">Fruit Cutting Master</h1>
+        <!-- <div class="input-container">
             <input type="text" id="playerID" placeholder="Enter your ID">
-        </div>
+        </div> -->
         <div class="difficulty-container">
             <select id="difficultySelect">
-                <option value="" disabled selected>Select Difficulty</option>
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
+                <option value="" disabled selected id="difficultyPlaceholder">Select Difficulty</option>
+                <option value="easy" id="easyOption">Easy</option>
+                <option value="medium" id="mediumOption">Medium</option>
+                <option value="hard" id="hardOption">Hard</option>
             </select>
         </div>
         <button id="startButton">Start Game</button>
@@ -43,11 +43,70 @@
 
     <!-- Game Over Screen -->
     <div id="gameOverScreen" class="screen hidden">
-        <h2>Game Over</h2>
+        <h2 id="gameOverText">Game Over</h2>
         <div id="finalScore">Final Score: 0</div>
         <button id="restartButton">Play Again</button>
         <button id="homeButton" class="home-button">Back to Home</button>
     </div>
+
+    <script>
+        // Get language setting from localStorage
+        const language = localStorage.getItem('language') || 'en'; // Default to English if not set
+
+        const translations = {
+            en: {
+                gameTitle: 'Fruit Cutting Master',
+                difficultyPlaceholder: 'Select Difficulty',
+                easyOption: 'Easy',
+                mediumOption: 'Medium',
+                hardOption: 'Hard',
+                startButton: 'Start Game',
+                exitButton: 'Exit Game',
+                score: 'Score: ',
+                life: 'Lives: ',
+                toComplete: 'Remaining Repetitions: ',
+                gameOverText: 'Game Over',
+                restartButton: 'Play Again',
+                homeButton: 'Back to Home'
+            },
+            zh: {
+                gameTitle: '切水果大师',
+                difficultyPlaceholder: '选择难度',
+                easyOption: '简单',
+                mediumOption: '中等',
+                hardOption: '困难',
+                startButton: '开始游戏',
+                exitButton: '退出游戏',
+                score: '分数: ',
+                life: '生命: ',
+                toComplete: '剩余次数: ',
+                gameOverText: '游戏结束',
+                restartButton: '再玩一次',
+                homeButton: '返回首页'
+            }
+        };
+
+        // Apply translation based on the selected language
+        function applyTranslation() {
+            const translation = translations[language];
+            document.getElementById('gameTitle').textContent = translation.gameTitle;
+            document.getElementById('difficultyPlaceholder').textContent = translation.difficultyPlaceholder;
+            document.getElementById('easyOption').textContent = translation.easyOption;
+            document.getElementById('mediumOption').textContent = translation.mediumOption;
+            document.getElementById('hardOption').textContent = translation.hardOption;
+            document.getElementById('startButton').textContent = translation.startButton;
+            document.getElementById('exitButton').textContent = translation.exitButton;
+            document.getElementById('score').textContent = translation.score;
+            document.getElementById('life').textContent = translation.life;
+            document.getElementById('toComplete').textContent = translation.toComplete;
+            document.getElementById('gameOverText').textContent = translation.gameOverText;
+            document.getElementById('restartButton').textContent = translation.restartButton;
+            document.getElementById('homeButton').textContent = translation.homeButton;
+        }
+
+        // Call the applyTranslation function when the page is loaded
+        window.onload = applyTranslation;
+    </script>
 
     <script type="module" src="/src/main.js"></script>
 </body>

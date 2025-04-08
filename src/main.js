@@ -16,18 +16,28 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // 添加开始游戏按钮事件监听
     document.getElementById('startButton').addEventListener('click', () => {
-        const playerID = document.getElementById('playerID').value;
+        // const playerID = document.getElementById('playerID').value;
         const difficulty = document.getElementById('difficultySelect').value;
         
-        if (playerID && difficulty) {
-            game.start(playerID, difficulty);
+        // if (playerID && difficulty) {
+        //     game.start(playerID, difficulty);
+        // } else {
+        //     alert('请输入ID并选择难度');
+        // }
+        if (difficulty) {
+            game.start(difficulty);
         } else {
-            alert('请输入ID并选择难度');
+            alert('请选择难度');
         }
     });
 
     // 修改退出按钮跳转地址
     document.getElementById('exitButton').addEventListener('click', () => {
-        window.location.href = 'https://uoabiolab.github.io/GameIndex/';
+        const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+        const mainPage = isLocal
+            ? '/GameIndex/index.html'  // 本地路径
+            : 'https://uoabiolab.github.io/GameIndexTest/';  // GitHub Pages 路径
+    
+        window.location.href = mainPage;
     });
 });
